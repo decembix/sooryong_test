@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <style>
+        .tabs {
+            display: flex;
+            cursor: pointer;
+        }
+        .tab {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-right: 5px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <div class="tab" onclick="showTab('login')">Login</div>
+        <div class="tab" onclick="showTab('register')">Register</div>
+        <div class="tab" onclick="showTab('write')">Write a Post</div>
+        <div class="tab" onclick="showTab('view')">View Posts</div>
+    </div>
+
+    <div id="login" class="tab-content">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="loginUsername">Username:</label><br>
+            <input type="text" id="loginUsername" name="username"><br><br>
+            <label for="loginPassword">Password:</label><br>
+            <input type="password" id="loginPassword" name="password"><br><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <div id="register" class="tab-content">
+        <h1>Register</h1>
+        <form id="registerForm">
+            <label for="registerUsername">Username:</label><br>
+            <input type="text" id="registerUsername" name="username"><br><br>
+            <label for="registerPassword">Password:</label><br>
+            <input type="password" id="registerPassword" name="password"><br><br>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <div id="write" class="tab-content">
+        <h1>Write a Post</h1>
+        <form id="postForm">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title"><br><br>
+            <label for="content">Content:</label><br>
+            <textarea id="content" name="content"></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div id="view" class="tab-content">
+        <h1>Posts</h1>
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button onclick="searchPosts()">Search</button>
+        <p id="error" class="error">Please enter at least two characters.</p>
+        <div id="posts"></div>
+    </div>
+
+    <script>
+        let authToken = '';
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            fetch('/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    authToken = data.token;
+                    alert('Login successful');
+                } else {
+                    alert(data.msg);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+
+            fetch('/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.msg);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            fetch('/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': authToken
+                },
+                body: JSON.stringify({ title, content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.msg) {
+                    alert(data.msg);
+                } else {
+                    alert('Post created successfully!');
+                    document.getElementById('title').value = '';
+                    document.getElementById('content').value = '';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+
+        function showTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            if (tabId === 'view') {
+                fetchPosts();
+            }
+        }
+
+        function fetchPosts() {
+            fetch('/posts')
+                .then(response => response.json())
+                .then(posts => {
+                    displayPosts(posts);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function searchPosts() {
+            const query = document.getElementById('searchInput').value;
+            const errorElement = document.getElementById('error');
+            if (query.length === 0) {
+                errorElement.style.display = 'none';
+                fetchPosts();
+                return;
+            }
+            if (query.length < 2) {
+                errorElement.style.display = 'block';
+                return;
+            }
+            errorElement.style.display = 'none';
+            fetch(`/posts/search/${query}`)
+                .then(response => response.json())
+                .then(posts => {
+                    displayPosts(posts);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function displayPosts(posts) {
+            const postsDiv = document.getElementById('posts');
+            postsDiv.innerHTML = '';
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                const postDate = new Date(post.date);
+                const formattedDate = postDate.toLocaleString();
+                postElement.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <p>${post.content}</p>
+                    <p><small>Posted by: ${post.author.username} on ${formattedDate}</small></p>
+                    <button onclick="deletePost('${post._id}')">Delete</button>
+                    <hr>
+                `;
+                postsDiv.appendChild(postElement);
+            });
+        }
+
+        function deletePost(postId) {
+            fetch(`/posts/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    'x-auth-token': authToken
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchPosts();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Show login tab by default
+        showTab('login');
+    </script>
+</body>
+</html>

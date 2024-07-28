@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수룡 선배</title>
+    <link rel="stylesheet" href="../asset/Main.css"> <!--스타일시트 적용-->
+    <script src="../asset/tab.js"></script> <!--자바스크립트 적용-->
+    <script src="../back/main.js" defer></script> <!-- main.js 적용 -->
+    <script src="../back/auth.js" defer></script> <!-- 로그인 상태 확인 스크립트 -->
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="Main.html"><img src="../asset/수룡선배 아이콘2.png" width="400px"></a>
+        </div>
+        <div id="signin">
+            <a href="signin.html">로그인</a>
+            <a href="join.html">회원가입</a>
+        </div>
+    </header>
+    <main>
+        <nav class="folder"> <!--네비게이션 바-->
+
+            <div class="tabs"> <!--폴더 탭-->
+                <button class="tab" onclick="openTab(event, 'tab-1')">
+                    <div><span>수정캠퍼스</span></div>
+                </button>
+                <button class="tab" onclick="openTab(event, 'tab-2')">
+                    <div><span>운정캠퍼스</span></div>
+                </button>
+                <button class="tab" onclick="openTab(event, 'tab-3')">
+                    <div><span>셔틀버스</span></div>
+                </button>
+                <button class="tab" onclick="openTab(event, 'tab-4')">
+                    <div><span>수정이 공간</span></div>
+                </button>
+            </div>
+
+            <div class="content"> <!--탭 안의 내용-->
+                <div class="content__inner" id="tab-1"> <!--수캠 지도-->
+                    <div class="page">
+                        <div class="left" id="sjMap">
+                        </div>
+                        <div class="right">
+                            <p> 수정관 </p>
+                            <p> 성신관 </p>
+                            <p> 난향관 </p>
+                            <p> 조형 1관 </p>
+                            <p> 조형 2관 </p>
+                            <p> 음악관 </p>
+                            <p> 학생회관 </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content__inner" id="tab-2"> <!--운캠 지도-->
+                    <div class="page">
+                        <div class="left" id="ujMap">
+                        </div>
+                        <div class="right">
+                            <p> 수정관 </p>
+                            <p> 성신관 </p>
+                            <p> 난향관 </p>
+                            <p> 조형 1관 </p>
+                            <p> 조형 2관 </p>
+                            <p> 음악관 </p>
+                            <p> 학생회관 </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content__inner" id="tab-3"> <!--셔틀버스-->
+                    <div class="page">
+                        <p> 버스 시간표, 탑승 장소 사진 등 넣을 예정</p>
+                    </div>
+                </div>
+
+                <div class="content__inner" id="tab-4"> <!--수정이 공간-->
+                    <div class="page">
+                        <div class="top">
+                            <form class="search-box" method="get">
+                                <input class="search-txt" type="text" placeholder="검색어를 입력하세요.">
+                                <button class="search-btn" type="submit">
+                                    <img src="../asset/검색.png" alt="검색 버튼" width="30px">
+                                </button>
+                            </form>
+                        </div>
+                        <div class="tab_content"> <!--수정이 공간 tab-->
+                            <input type="radio" name="tabmenu" id="FAQ" checked>
+                            <label for="FAQ">FAQ</label>
+                            <input type="radio" name="tabmenu" id="Q&A">
+                            <label for="Q&A">Q&A</label>
+
+                            <div class="conbox con1"> <!--FAQ 게시판-->
+                                <div class="accordion">
+                                    <input type="radio" name="accordion" id="answer01">
+                                    <label for="answer01">성적장학금과 성신장학금의 차이점이 궁금해요<em></em></label>
+                                    <div>
+                                        <p>여기에 추가되는 부분이 자주묻는 질문의 답변, 내용 추천 받아요*^^*</p>
+                                    </div>
+                                    <input type="radio" name="accordion" id="answer02">
+                                    <label for="answer02">컨텐츠 제목 부분<em></em></label>
+                                    <div>
+                                        <p>여기에 추가되는 부분이 자주묻는 질문의 답변, 내용 추천 받아요*^^*</p>
+                                    </div>
+                                    <input type="radio" name="accordion" id="answer03">
+                                    <label for="answer03">컨텐츠 제목 부분<em></em></label>
+                                    <div>
+                                        <p>여기에 추가되는 부분이 자주묻는 질문의 답변, 내용 추천 받아요*^^*</p>
+                                    </div>
+                                    <input type="radio" name="accordion" id="answer04">
+                                    <label for="answer04">컨텐츠 제목 부분<em></em></label>
+                                    <div>
+                                        <p>여기에 추가되는 부분이 자주묻는 질문의 답변, 내용 추천 받아요*^^*</p>
+                                    </div>
+                                    <input type="radio" name="accordion" id="answer05">
+                                    <label for="answer05">컨텐츠 제목 부분<em></em></label>
+                                    <div>
+                                        <p>여기에 추가되는 부분이 자주묻는 질문의 답변, 내용 추천 받아요*^^*</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="conbox con2"> <!--Q&A 게시판-->
+                                <div class="idx_board">
+                                    <div class="title">
+                                        <h2 class="name">Q&A 게시판</h2>
+                                        <p>학교 생활하면서 궁금한 사항들을 묻고 답하는 게시판입니다.</p>
+                                    </div>
+                                    <div class="list">
+                                        <div class="top">
+                                            <div class="num">번호</div>
+                                            <div class="title">제목</div>
+                                            <div class="writer">글쓴이</div>
+                                            <div class="date">작성일</div>
+                                        </div>
+                                        <!-- 게시글 목록이 여기에 동적으로 추가됩니다 -->
+                                    </div>
+                                    <div class="board_page">
+                                        <a href="#" class="bt first"> &lt; &lt; </a>
+                                        <a href="#" class="bt prev"> &lt; </a>
+                                        <a href="#" class="num on">1</a>
+                                        <a href="#" class="num">2</a>
+                                        <a href="#" class="num">3</a>
+                                        <a href="#" class="num">4</a>
+                                        <a href="#" class="num">5</a>
+                                        <a href="#" class="bt next">></a>
+                                        <a href="#" class="bt last">>></a>
+                                    </div>
+                                    <div class="bt_wrap">
+                                        <a href="write.html" class="on">등록</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+
+        <!--메인 페이지-->
+        <div class="main">
+            <div class="slider"> <!--이미지 슬라이드-->
+                <div class="slide"></div>
+                <div class="slide"></div>
+                <div class="slide"></div>
+                <div class="slide"></div>
+            </div>
+            <div class="introduction">
+                <p>수룡선배란 무엇인가요?</p>
+                <p>수룡선배 100% 활용하기!</p>
+                <p>수룡선배 제작팀</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>©컴공 전복자들</p>
+    </footer>
+</body>
+
+</html>

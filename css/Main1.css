@@ -1,0 +1,134 @@
+/*Main1.css등등 파일뒤에1붙어있는게 나중에 추가한 것 원래 css파일도 있으니 다들 보시고 취향인 거 써주세요 */
+/*다른 코드 불러오기*/
+@import url(list.css);
+@import url(tab.css);
+@import url(signin.css);
+
+/*@font-face{ 
+    font-family:'DungGeunMo';
+    font-style:normal;font-weight:400;src:url('//cdn.df.nexon.com/img/common/font/DungGeunMo.otf')format('opentype')}
+*/
+/*@font-face{ 
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+}*/
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font: 1.2rem "DungGeunMo";
+    justify-content: center;
+    width: 100%;
+    background-color:rgb(241, 238, 255);
+}
+
+main{
+    padding: 0rem 4rem;
+}
+
+footer{
+    text-align: center;
+    font-size: 15px;
+}
+
+.logo{
+    text-align: center;
+}
+
+#signin{
+    position: fixed;
+    float:right;
+    top:0.3rem;
+    right:0.3rem;
+    font: size 0.5rem;
+    color:rgb(46, 36, 112);
+}
+
+/*이미지 슬라이드*/
+.main{
+    margin: -2px auto;
+    max-width: 60rem;
+    width: 100%;
+    display: block;
+    
+    padding: 1rem;
+    min-height: 15em;
+    max-height: 50em;
+
+    border: 3px solid;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.slider {
+    position: relative;
+    overflow: hidden;
+
+    text-align: center;
+    margin: 0 auto;
+    width: 500px;
+    height: 250px;
+  }
+  
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  
+    animation: slider 9s infinite linear;
+  }
+  
+  .slide:nth-child(1) {
+    background-image: url(../asset/성신여대\ 풍경/봄.jpg);
+    animation-delay: 0;
+  }
+  .slide:nth-child(2) {
+    background-image: url(../asset/성신여대\ 풍경/여름.jpg);
+    animation-delay: -3s;
+  }
+  .slide:nth-child(3) {
+    background-image: url(../asset/성신여대\ 풍경/가을.jpg);
+    animation-delay: -6s;
+  }
+  .slide:nth-child(4) {
+    background-image: url(../asset/성신여대\ 풍경/겨울.jpg);
+    animation-delay: -9s;
+  }
+  
+  @keyframes slider {
+    0% {
+      transform: translateX(0);
+    }
+  
+    26% {
+      transform: translateX(0);
+    }
+    33% {
+      transform: translateX(-100%);
+      animation-timing-function: step-end;
+    }
+    93% {
+      transform: translateX(100%);
+    }
+  
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .introduction{
+    padding: 0px 30px;
+  }

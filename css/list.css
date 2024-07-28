@@ -1,0 +1,248 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, li {
+    list-style: none;
+}
+
+#tab-4 > .page {
+    display: flex;
+    flex-direction: column;
+}
+
+.top{
+    height: 10%;
+    display: block;
+    margin: 0 auto;
+}
+
+.bottom{
+    height: 90%;
+}
+
+/*검색 관련*/
+.search-box{
+    height: 40px;
+    width: 400px;
+    background-color: #fff;
+    border-radius: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #55BEB6;
+}
+
+.search-txt{
+    border: none;
+    background-color: #fff;
+    outline: none;
+    float: left;
+    font-size: 15px;
+    width: 300px;
+}
+
+.search-btn{
+    float: right;
+    width: 25px;
+    height: 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*게시판 탭메뉴.ver*/
+input[name="tabmenu"] {
+    display: none;
+}
+input[name="tabmenu"] + label {
+    display: inline-block;
+    margin: 10px 0px;
+    padding: 0px 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+}
+input[name="tabmenu"]:checked + label {
+    border: 3px solid #55BEB6;
+    color: #55BEB6;
+}
+
+.conbox {
+    width: 100%;
+    min-height: 15em;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 auto;
+    font-size: 20px;
+    display: none;
+}
+
+input[id="FAQ"]:checked ~ .con1 {display: block;}
+input[id="Q&A"]:checked ~ .con2 {display: block;}
+
+/*FAQ 아코디언.ver*/
+/*[속성*=속성값] 의미: 뒤에 값을 포함한다면, 선택*/
+input[id*="answer"]{
+    display: none;
+}
+
+input[id*="answer"] + label {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #34A397;
+    cursor: pointer;
+    position: relative;
+}
+
+input[id*="answer"] + label em {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    display: inline-block;
+    background: url('../asset/펼치기.png') no-repeat;
+    background-size: 20px 20px;
+}
+
+input[id*="answer"] + label + div {
+    max-height: 0;
+    transition: all .35s;
+    overflow: hidden;
+    background: #B1FDFF;
+    font-size: 20px;
+}
+
+input[id*="answer"] + label + div p {
+    display: inline-block;
+    padding: 20px;
+}
+
+input[id*="answer"]:checked + label + div {
+    max-height: 500px;
+}
+
+input[id*="answer"]:checked + label em {
+    background-position: 0 -30px;
+}
+
+/*Q&A 게시판 관련*/
+.idx_board {
+    display: inline-block;
+    width: 100%;
+}
+
+.idx_board .title {
+    position: relative;
+    padding: 0px 20px;
+}
+
+.idx_board .title p {
+    margin-top: 5px;
+}
+
+
+.list {
+    width: 100%;
+    border-top: 3px solid #000;
+    font-size: 1.5rem;
+}
+
+.list > div {
+    border-bottom: 1px solid #ddd;
+    font-size: 0;
+}
+
+.list > div.top {
+    border-bottom: 1px solid #999;
+}
+
+.list > div:last-child {
+    border-bottom: 3px solid #000;
+}
+
+.list > div > div {
+    display: inline-block;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.list .top .title {
+    text-align: center;
+}
+
+.list .num {width: 10%;}
+.list .title {
+    width: 45%;
+    text-align: left;
+}
+.list .writer {width: 20%;}
+.list .date {width: 25%;}
+
+/*Q&A 게시판 번호*/
+.board_page {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0;
+}
+
+.board_page a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    line-height: 100%;
+}
+
+.board_page a.bt {
+    padding-top: 7px;
+    font-size: 1rem;
+    letter-spacing: -1px;
+}
+
+.board_page a.num {
+    padding-top: 5px;
+    font-size: 1.2rem;
+}
+
+.board_page a.num.on {
+    border-color: #000;
+    background: #000;
+    color: #fff;
+}
+
+/*등록하기 버튼*/
+.bt_wrap {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0;
+}
+
+.bt_wrap a {
+    display: inline-block;
+    min-width: 70px;
+    margin-left: 7px;
+    padding: 3px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.2rem;
+}
+
+.bt_wrap a:first-child {
+    margin-left: 0;
+}
+
+.bt_wrap a.on {
+    background: #000;
+    color: #fff;
+}
